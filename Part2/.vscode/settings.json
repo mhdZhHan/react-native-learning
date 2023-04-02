@@ -1,0 +1,5 @@
+{
+    "prettier.tabWidth": 4,
+    "prettier.withNodeModules": true,
+    "prettier.useTabs": true
+}
