@@ -1,0 +1,42 @@
+export const playListData = [
+    {
+        id: 1,
+        title: "Eco Technology",
+        artist: "Lexin Music",
+        album: "pixabay",
+        artwork: require('./assets/images/one.webp'),
+        url: require('./assets/music/one.mp3'),
+    },
+    {
+        id: 2,
+        title: "Waterfall",
+        artist: "RomanSenykMusic",
+        album: "pixabay",
+        artwork: require('./assets/images/two.webp'),
+        url: require('./assets/music/two.mp3'),
+    },
+    {
+        id: 3,
+        title: "Risk",
+        artist: "StudioKolomna",
+        album: "pixabay",
+        artwork: require('./assets/images/three.webp'),
+        url: require('./assets/music/three.mp3'),
+    },
+    {
+        id: 4,
+        title: "Dark Mystery Trailer (Taking Our time)",
+        artist: "AlexGrohl",
+        album: "pixabay",
+        artwork: require('./assets/images/four.webp'),
+        url: require('./assets/music/four.mp3'),
+    },
+    {
+        id: 5,
+        title: "Lifelike",
+        artist: "AlexiAction",
+        album: "pixabay",
+        artwork: require('./assets/images/five.webp'),
+        url: require('./assets/music/five.mp3'),
+    },
+]
