@@ -180,7 +180,7 @@ export default function Login({ navigation }) {
                     color: Colors.DEFAULT_BLACK,
                     lineHeight: 13 * 1.4,
                 }}>Don't have an account?</Text>
-                <Text onPress={()=> navigation.navigate('Signup')} style={{
+                <Text onPress={() => navigation.navigate('Signup')} style={{
                     fontSize: 13,
                     fontFamily: Fonts.UBUNTU_MEDIUM,
                     color: Colors.DEFAULT_GREEN,
