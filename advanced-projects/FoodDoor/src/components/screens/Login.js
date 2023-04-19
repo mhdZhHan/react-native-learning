@@ -11,12 +11,15 @@ import Feather from 'react-native-vector-icons/Feather'
 import { Colors, Fonts, Images } from '../../contants'
 
 // includes
-import { Separator } from '../includes'
+import { Separator, ToggleButton } from '../includes'
+
+// utils
 import { Display } from '../../utils'
 
 
-export default function Login() {
+export default function Login({ navigation }) {
     const [isPasswordShow, setIsPasswordShow] = useState(true)
+
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle='dark-content' backgroundColor={Colors.DEFAULT_WHITE} translucent />
@@ -27,7 +30,7 @@ export default function Login() {
                 paddingVertical: 16,
                 paddingHorizontal: 20,
             }}>
-                <Ionic name="chevron-back-outline" size={30} />
+                <Ionic name="chevron-back-outline" size={30} color={Colors.DEFAULT_BLACK} />
                 <Text style={[styles.text, {
                     fontSize: 20,
                     fontFamily: Fonts.UBUNTU_MEDIUM,
@@ -67,7 +70,7 @@ export default function Login() {
                     flexDirection: 'row',
                     alignItems: 'center',
                 }}>
-                    <Feather name='user' size={22} style={{marginRight: 10}} />
+                    <Feather name='user' size={22} color={Colors.DEFAULT_GREY} style={{marginRight: 10}} />
                     <TextInput 
                         placeholder='Username' 
                         placeholderTextColor={Colors.DEFAULT_GREY}
@@ -97,7 +100,7 @@ export default function Login() {
                     flexDirection: 'row',
                     alignItems: 'center',
                 }}>
-                    <Feather name='lock' size={22} style={{marginRight: 10}} />
+                    <Feather name='lock' size={22} color={Colors.DEFAULT_GREY} style={{marginRight: 10}} />
                     <TextInput
                         secureTextEntry={isPasswordShow}
                         placeholder='Password' 
@@ -116,6 +119,7 @@ export default function Login() {
                         name={!isPasswordShow ? 'eye' : 'eye-off'}
                         size={22} 
                         style={{marginRight:10}}
+                        color={Colors.DEFAULT_GREY}
                         onPress={()=> setIsPasswordShow(!isPasswordShow)}
                     />
                 </View>
@@ -127,9 +131,13 @@ export default function Login() {
                 alignItems: 'center',
                 justifyContent: 'space-between',
             }}>
-                <View>
+                <View style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                }}>
+                    <ToggleButton size={.5} />
                     <Text style={{
-                        marginLeft: 20,
+                        marginLeft: 10,
                         fontSize: 12,
                         lineHeight: 12 * 1.4,
                         color: Colors.DEFAULT_GREY,
@@ -172,7 +180,7 @@ export default function Login() {
                     color: Colors.DEFAULT_BLACK,
                     lineHeight: 13 * 1.4,
                 }}>Don't have an account?</Text>
-                <Text style={{
+                <Text onPress={()=> navigation.navigate('Signup')} style={{
                     fontSize: 13,
                     fontFamily: Fonts.UBUNTU_MEDIUM,
                     color: Colors.DEFAULT_GREEN,
