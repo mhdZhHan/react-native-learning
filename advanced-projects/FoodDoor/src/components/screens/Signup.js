@@ -52,7 +52,8 @@ export default function Signup({ navigation }) {
             </View>
             {/* Top section end */}
 
-            <Text style={{
+            <Text 
+                style={{
                     fontSize: 20,
                     fontFamily: Fonts.UBUNTU_MEDIUM,
                     lineHeight: 20 * 1.4,
@@ -60,151 +61,154 @@ export default function Signup({ navigation }) {
                     marginBottom: 10,
                     marginHorizontal: 20,
                     color: Colors.DEFAULT_BLACK
-                }}>Create Account</Text>
-                <Text style={{
+                }}
+            >Create Account</Text>
+            <Text 
+                style={{
                     fontSize: 20,
-                    fontFamily: Fonts.UBUNTU_MEDIUM,
+                    fontFamily: Fonts.UBUNTU_REGULAR,
                     color: Colors.DEFAULT_BLACK,
                     lineHeight: 20 * 1.4,
                     marginTop: 10,
                     marginBottom: 20,
                     marginHorizontal: 20,
-                }}>Enter your email, chose a username and password</Text>
+                }}
+            >Enter your email, chose a username and password</Text>
 
-                {/* Input section start */}
+            {/* Input section start */}
+            <View style={{
+                backgroundColor: Colors.LIGHT_GREY,
+                marginHorizontal: 20,
+                paddingHorizontal: 10,
+                borderRadius: 8,
+                borderWidth: .8,
+                borderColor: Colors.LIGHT_GREY2,
+                justifyContent: 'center',
+            }}>
                 <View style={{
-                    backgroundColor: Colors.LIGHT_GREY,
-                    marginHorizontal: 20,
-                    paddingHorizontal: 10,
-                    borderRadius: 8,
-                    borderWidth: .8,
-                    borderColor: Colors.LIGHT_GREY2,
-                    justifyContent: 'center',
-                }}>
-                    <View style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                    }}>
-                        <Feather 
-                            name='user' 
-                            size={22} 
-                            color={Colors.DEFAULT_GREY} 
-                            style={{marginRight: 10}} 
-                        />
-                        <TextInput 
-                            placeholder='Username' 
-                            placeholderTextColor={Colors.DEFAULT_GREY}
-                            selectionColor={Colors.DEFAULT_GREY}
-                            style={{
-                                fontSize: 18,
-                                textAlignVertical: 'center',
-                                padding: 0,
-                                height: Display.setHeight(6),
-                                color: Colors.DEFAULT_BLACK,
-                                flex: 1,
-                            }}
-                        />
-                    </View>
-                </View>
-
-                <Separator height={16} />
-
-                <View style={{
-                    backgroundColor: Colors.LIGHT_GREY,
-                    marginHorizontal: 20,
-                    paddingHorizontal: 10,
-                    borderRadius: 8,
-                    borderWidth: .8,
-                    borderColor: Colors.LIGHT_GREY2,
-                    justifyContent: 'center',
-                }}>
-                    <View style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                    }}>
-                        <Feather 
-                            name='mail' 
-                            size={22} 
-                            color={Colors.DEFAULT_GREY} 
-                            style={{marginRight: 10}} 
-                        />
-                        <TextInput 
-                            placeholder='Email' 
-                            placeholderTextColor={Colors.DEFAULT_GREY}
-                            selectionColor={Colors.DEFAULT_GREY}
-                            style={{
-                                fontSize: 18,
-                                textAlignVertical: 'center',
-                                padding: 0,
-                                height: Display.setHeight(6),
-                                color: Colors.DEFAULT_BLACK,
-                                flex: 1,
-                            }}
-                        />
-                    </View>
-                </View>
-
-                <Separator height={16} />
-
-                <View style={{
-                    backgroundColor: Colors.LIGHT_GREY,
-                    marginHorizontal: 20,
-                    paddingHorizontal: 10,
-                    borderRadius: 8,
-                    borderWidth: .8,
-                    borderColor: Colors.LIGHT_GREY2,
-                    justifyContent: 'center',
-                }}>
-                    <View style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                    }}>
-                        <Feather 
-                            name='lock' 
-                            size={22} 
-                            color={Colors.DEFAULT_GREY} style={{marginRight: 10}} 
-                        />
-                        <TextInput
-                            secureTextEntry={isPasswordShow}
-                            placeholder='Password' 
-                            placeholderTextColor={Colors.DEFAULT_GREY}
-                            selectionColor={Colors.DEFAULT_GREY}
-                            style={{
-                                fontSize: 18,
-                                textAlignVertical: 'center',
-                                padding: 0,
-                                height: Display.setHeight(6),
-                                color: Colors.DEFAULT_BLACK,
-                                flex: 1,
-                            }}
-                        />
-                        <Feather 
-                            name={!isPasswordShow ? 'eye' : 'eye-off'}
-                            size={22} 
-                            style={{marginRight:10}}
-                            color={Colors.DEFAULT_GREY}
-                            onPress={()=> setIsPasswordShow(!isPasswordShow)}
-                        />
-                    </View>
-                </View>
-                {/* Input section end */}
-
-                <TouchableOpacity activeOpacity={0.8} style={{
-                    backgroundColor: Colors.DEFAULT_GREEN,
-                    marginHorizontal: 20,
-                    borderRadius: 8,
-                    height: Display.setHeight(6),
-                    justifyContent: 'center',
+                    flexDirection: 'row',
                     alignItems: 'center',
-                    marginTop: 20,
                 }}>
-                    <Text style={{
-                        fontSize: 18,
-                        fontFamily: Fonts.UBUNTU_MEDIUM,
-                        color: Colors.DEFAULT_WHITE,
-                        lineHeight: 18 * 1.4,
-                    }}>Sign Up</Text>
-                </TouchableOpacity>
+                    <Feather 
+                        name='user' 
+                        size={22} 
+                        color={Colors.DEFAULT_GREY} 
+                        style={{marginRight: 10}} 
+                    />
+                    <TextInput 
+                        placeholder='Username' 
+                        placeholderTextColor={Colors.DEFAULT_GREY}
+                        selectionColor={Colors.DEFAULT_GREY}
+                        style={{
+                            fontSize: 18,
+                            textAlignVertical: 'center',
+                            padding: 0,
+                            height: Display.setHeight(6),
+                            color: Colors.DEFAULT_BLACK,
+                            flex: 1,
+                        }}
+                    />
+                </View>
+            </View>
+
+            <Separator height={16} />
+
+            <View style={{
+                backgroundColor: Colors.LIGHT_GREY,
+                marginHorizontal: 20,
+                paddingHorizontal: 10,
+                borderRadius: 8,
+                borderWidth: .8,
+                borderColor: Colors.LIGHT_GREY2,
+                justifyContent: 'center',
+            }}>
+                <View style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                }}>
+                    <Feather 
+                        name='mail' 
+                        size={22} 
+                        color={Colors.DEFAULT_GREY} 
+                        style={{marginRight: 10}} 
+                    />
+                    <TextInput 
+                        placeholder='Email' 
+                        placeholderTextColor={Colors.DEFAULT_GREY}
+                        selectionColor={Colors.DEFAULT_GREY}
+                        style={{
+                            fontSize: 18,
+                            textAlignVertical: 'center',
+                            padding: 0,
+                            height: Display.setHeight(6),
+                            color: Colors.DEFAULT_BLACK,
+                            flex: 1,
+                        }}
+                    />
+                </View>
+            </View>
+
+            <Separator height={16} />
+
+            <View style={{
+                backgroundColor: Colors.LIGHT_GREY,
+                marginHorizontal: 20,
+                paddingHorizontal: 10,
+                borderRadius: 8,
+                borderWidth: .8,
+                borderColor: Colors.LIGHT_GREY2,
+                justifyContent: 'center',
+            }}>
+                <View style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                }}>
+                    <Feather 
+                        name='lock' 
+                        size={22} 
+                        color={Colors.DEFAULT_GREY} style={{marginRight: 10}} 
+                    />
+                    <TextInput
+                        secureTextEntry={isPasswordShow}
+                        placeholder='Password' 
+                        placeholderTextColor={Colors.DEFAULT_GREY}
+                        selectionColor={Colors.DEFAULT_GREY}
+                        style={{
+                            fontSize: 18,
+                            textAlignVertical: 'center',
+                            padding: 0,
+                            height: Display.setHeight(6),
+                            color: Colors.DEFAULT_BLACK,
+                            flex: 1,
+                        }}
+                    />
+                    <Feather 
+                        name={!isPasswordShow ? 'eye' : 'eye-off'}
+                        size={22} 
+                        style={{marginRight:10}}
+                        color={Colors.DEFAULT_GREY}
+                        onPress={()=> setIsPasswordShow(!isPasswordShow)}
+                    />
+                </View>
+            </View>
+            {/* Input section end */}
+
+            <TouchableOpacity activeOpacity={0.8} style={{
+                backgroundColor: Colors.DEFAULT_GREEN,
+                marginHorizontal: 20,
+                borderRadius: 8,
+                height: Display.setHeight(6),
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginTop: 20,
+            }}>
+                <Text style={{
+                    fontSize: 18,
+                    fontFamily: Fonts.UBUNTU_MEDIUM,
+                    color: Colors.DEFAULT_WHITE,
+                    lineHeight: 18 * 1.4,
+                }}>Sign Up</Text>
+            </TouchableOpacity>
 
             <Text style={{
                 fontSize: 15,

@@ -21,7 +21,7 @@ export default function Login({ navigation }) {
     const [isPasswordShow, setIsPasswordShow] = useState(true)
 
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             {/* Top section start */}
             <StatusBar 
                 barStyle='dark-content' 
@@ -61,7 +61,7 @@ export default function Login({ navigation }) {
             }}>Welcome</Text>
             <Text style={{
                 fontSize: 20,
-                fontFamily: Fonts.UBUNTU_MEDIUM,
+                fontFamily: Fonts.UBUNTU_REGULAR,
                 color: Colors.DEFAULT_BLACK,
                 lineHeight: 20 * 1.4,
                 marginTop: 10,
@@ -161,12 +161,15 @@ export default function Login({ navigation }) {
                         fontFamily: Fonts.UBUNTU_MEDIUM,
                     }}>Remember me</Text>
                 </View>
-                <Text style={{
-                    fontSize: 12,
-                    fontFamily: Fonts.UBUNTU_BOLD,
-                    color: Colors.DEFAULT_GREEN,
-                    lineHeight: 12 * 1.4,
-                }}>Forgot password</Text>
+                <Text 
+                    style={{
+                        fontSize: 12,
+                        fontFamily: Fonts.UBUNTU_BOLD,
+                        color: Colors.DEFAULT_GREEN,
+                        lineHeight: 12 * 1.4,
+                    }}
+                    onPress={()=> navigation.navigate('ForgotPassword')}
+                >Forgot password</Text>
             </View>
 
             <TouchableOpacity activeOpacity={0.8} style={{
@@ -289,7 +292,7 @@ export default function Login({ navigation }) {
                     }}>Connect with Google</Text>
                 </View>
             </TouchableOpacity>
-        </SafeAreaView>
+        </View>
     )
 }
 
