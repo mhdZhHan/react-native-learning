@@ -22,7 +22,12 @@ export default function Login({ navigation }) {
 
     return (
         <SafeAreaView style={styles.container}>
-            <StatusBar barStyle='dark-content' backgroundColor={Colors.DEFAULT_WHITE} translucent />
+            {/* Top section start */}
+            <StatusBar 
+                barStyle='dark-content' 
+                backgroundColor={Colors.DEFAULT_WHITE} 
+                translucent 
+            />
             <Separator height={StatusBar.currentHeight} />
             <View style={{
                 flexDirection: 'row',
@@ -30,15 +35,21 @@ export default function Login({ navigation }) {
                 paddingVertical: 16,
                 paddingHorizontal: 20,
             }}>
-                <Ionic name="chevron-back-outline" size={30} color={Colors.DEFAULT_BLACK} />
+                <Ionic 
+                    name="chevron-back-outline" 
+                    size={30} 
+                    color={Colors.DEFAULT_BLACK} 
+                />
                 <Text style={[styles.text, {
                     fontSize: 20,
-                    fontFamily: Fonts.UBUNTU_MEDIUM,
+                    fontFamily: Fonts.UBUNTU_BOLD,
                     lineHeight: 20 * 1.4,
                     textAlign: 'center',
                     width: Display.setWidth(80),
                 }]}>Login</Text>
             </View>
+            {/* Top section end */}
+
             <Text style={{
                 fontSize: 20,
                 fontFamily: Fonts.UBUNTU_MEDIUM,
@@ -57,6 +68,8 @@ export default function Login({ navigation }) {
                 marginBottom: 20,
                 marginHorizontal: 20,
             }}>Enter your username and password, and enjoy ordering food</Text>
+
+            {/* Input section start */}
             <View style={{
                 backgroundColor: Colors.LIGHT_GREY,
                 marginHorizontal: 20,
@@ -85,8 +98,10 @@ export default function Login({ navigation }) {
                         }}
                      />
                 </View>
-            </View>
+            </View>{/* input username */}
+
             <Separator height={16} />
+
             <View style={{
                 backgroundColor: Colors.LIGHT_GREY,
                 marginHorizontal: 20,
@@ -124,6 +139,8 @@ export default function Login({ navigation }) {
                     />
                 </View>
             </View>
+            {/* Input section end */}
+
             <Text></Text>
             <View style={{
                 marginHorizontal: 20,
@@ -151,6 +168,7 @@ export default function Login({ navigation }) {
                     lineHeight: 12 * 1.4,
                 }}>Forgot password</Text>
             </View>
+
             <TouchableOpacity activeOpacity={0.8} style={{
                 backgroundColor: Colors.DEFAULT_GREEN,
                 marginHorizontal: 20,
@@ -167,6 +185,7 @@ export default function Login({ navigation }) {
                     lineHeight: 18 * 1.4,
                 }}>Sign In</Text>
             </TouchableOpacity>
+
             <View style={{
                 marginHorizontal: 20,
                 flexDirection: 'row',
@@ -188,6 +207,7 @@ export default function Login({ navigation }) {
                     marginLeft: 5,
                 }}>Sign Up</Text>
             </View>
+
             <Text style={{
                 fontSize: 15,
                 fontFamily: Fonts.UBUNTU_MEDIUM,
@@ -195,6 +215,7 @@ export default function Login({ navigation }) {
                 lineHeight: 15 * 1.4,
                 alignSelf: 'center',
             }}>OR</Text>
+
             <TouchableOpacity activeOpacity={0.8} style={{
                 backgroundColor: Colors.FABEBOOK_BLUE,
                 paddingVertical: 15,
@@ -231,6 +252,7 @@ export default function Login({ navigation }) {
                     }}>Connect with Facebook</Text>
                 </View>
             </TouchableOpacity>
+            
             <TouchableOpacity activeOpacity={0.8} style={{
                 backgroundColor: Colors.GOOGLE_BLUE,
                 paddingVertical: 15,
