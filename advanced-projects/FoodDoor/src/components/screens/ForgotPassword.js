@@ -60,7 +60,7 @@ export default function ForgotPassword({ navigation }) {
                     marginHorizontal: 20,
                     color: Colors.DEFAULT_BLACK
                 }}
-            >Forgot password</Text>
+            >Forgot Password</Text>
             <Text 
                 style={{
                     fontSize: 20,

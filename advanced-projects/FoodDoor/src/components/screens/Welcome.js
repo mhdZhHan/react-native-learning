@@ -33,7 +33,7 @@ const Pagination = ({index}) => {
     )
 }
 
-export default function Welcome() {
+export default function Welcome({ navigation }) {
     const [welcomeListIndex, setWelcomeListIndex] = useState(0)
     const welcomeListRef = useRef()
 
@@ -80,15 +80,18 @@ export default function Welcome() {
 
             {
                 welcomeListIndex === 2 ? (
-                    <TouchableOpacity activeOpacity={0.8} style={{
-                        backgroundColor: Colors.DEFAULT_GREEN,
-                        paddingHorizontal: 45,
-                        paddingVertical: 8,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        borderRadius: 8,
-                        elevation: 2,
-                    }}>
+                    <TouchableOpacity 
+                        activeOpacity={0.8} style={{
+                            backgroundColor: Colors.DEFAULT_GREEN,
+                            paddingHorizontal: 45,
+                            paddingVertical: 8,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            borderRadius: 8,
+                            elevation: 2,
+                        }}
+                        onPress={()=> navigation.navigate('Login')}
+                    >
                         <Text style={{
                             fontSize: 20,
                             color: Colors.DEFAULT_WHITE,

@@ -201,7 +201,9 @@ export default function Signup({ navigation }) {
                 justifyContent: 'center',
                 alignItems: 'center',
                 marginTop: 20,
-            }}>
+            }}
+            onPress={() => navigation.navigate('ResisterPhone')}
+            >
                 <Text style={{
                     fontSize: 18,
                     fontFamily: Fonts.UBUNTU_MEDIUM,
