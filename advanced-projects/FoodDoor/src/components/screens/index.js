@@ -4,6 +4,7 @@ import Login from "./Login"
 import Signup from "./Signup"
 import ForgotPassword from "./ForgotPassword"
 import ResisterPhone from "./ResisterPhone"
+import VerificationScreen from "./VerificationScreen"
 
 export {
     Splash, 
@@ -12,4 +13,5 @@ export {
     Signup, 
     ForgotPassword, 
     ResisterPhone,
+    VerificationScreen,
 }

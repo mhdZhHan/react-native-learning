@@ -43,6 +43,7 @@ export default function ResisterPhone({ navigation }) {
     const [inputContainerY, setInputContainerY] = useState(0)
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
     const [dropdownLayout, setDropdownLayout] = useState({})
+    const [phonenumber, setPhonenumber] = useState('')
 
     const closeDropdown = (pageX, pageY) => {
         if(isDropdownOpen){
@@ -189,6 +190,7 @@ export default function ResisterPhone({ navigation }) {
                             keyboardType='number-pad'
                             maxLength={10}
                             onFocus={() => setIsDropdownOpen(false)}
+                            onChangeText={(text)=> setPhonenumber(selectedCountry?.dial_code + text)}
                         />
                     </View>
                 </View>
@@ -203,6 +205,9 @@ export default function ResisterPhone({ navigation }) {
                     justifyContent: 'center',
                     alignItems: 'center',
                 }}
+                    onPress={() => {
+                        navigation.navigate('VerificationScreen', {phonenumber})
+                    }}
                 >
                     <Text style={{
                         fontSize: 18,

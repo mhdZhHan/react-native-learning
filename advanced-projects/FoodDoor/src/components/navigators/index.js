@@ -10,7 +10,8 @@ import {
     Welcome, 
     Signup, 
     ForgotPassword,
-    ResisterPhone
+    ResisterPhone,
+    VerificationScreen
 } from "../screens"
 
 const Stack = createNativeStackNavigator()
@@ -20,6 +21,7 @@ const Navigators = () => {
         <NavigationContainer>
             <Stack.Navigator screenOptions={{headerShown: false}}>
                 <Stack.Screen name="ResisterPhone" component={ResisterPhone} />
+                <Stack.Screen name="VerificationScreen" component={VerificationScreen} />
                 <Stack.Screen name="Splash" component={Splash} />
                 <Stack.Screen name="Welcome" component={Welcome} />
                 <Stack.Screen name="Login" component={Login} />
