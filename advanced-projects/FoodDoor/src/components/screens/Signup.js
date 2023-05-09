@@ -8,6 +8,10 @@ import React, { useState } from 'react'
 // icons
 import Ionic from 'react-native-vector-icons/Ionicons'
 import Feather from 'react-native-vector-icons/Feather'
+import AntDesign from 'react-native-vector-icons/AntDesign'
+
+// Lottie 
+import Lottie from 'lottie-react-native'
 
 // components (includes)
 import { Separator } from '../includes'
@@ -16,11 +20,133 @@ import { Separator } from '../includes'
 import { Colors, Fonts, Images } from '../../contants'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
+// services
+import { AuthService } from '../../services'
+
 // utils
 import { Display } from '../../utils'
 
+
+// coustom styles for form validation
+const inputStyle = (state) => {
+    switch(state){
+        case 'valid':
+            return {
+                backgroundColor: Colors.LIGHT_GREY,
+                marginHorizontal: 20,
+                paddingHorizontal: 10,
+                borderRadius: 8,
+                borderWidth: 1,
+                borderColor: Colors.DEFAULT_GREEN,
+                justifyContent: 'center',
+            }
+        case 'invalid':
+            return {
+                backgroundColor: Colors.LIGHT_GREY,
+                marginHorizontal: 20,
+                paddingHorizontal: 10,
+                borderRadius: 8,
+                borderWidth: 1,
+                borderColor: Colors.DEFAULT_RED,
+                justifyContent: 'center',
+            }
+        default:
+            return {
+                backgroundColor: Colors.LIGHT_GREY,
+                marginHorizontal: 20,
+                paddingHorizontal: 10,
+                borderRadius: 8,
+                borderWidth: .8,
+                borderColor: Colors.LIGHT_GREY2,
+                justifyContent: 'center',
+            }
+    }
+}
+
+// for form validation
+const showMarker = (state) => {
+    switch (state) {
+        case 'valid':
+            return (
+                <AntDesign 
+                    name="checkcircleo"
+                    color={Colors.SECONDARY_GREEN}
+                    size={20}
+                    style={{marginLeft: 5}}
+                />
+            )
+        case 'invalid':
+            return (
+                <AntDesign 
+                    name="closecircleo"
+                    color={Colors.DEFAULT_RED}
+                    size={20}
+                    style={{marginLeft: 5}}
+                />
+            )
+        default : return null
+    }
+}
+
 export default function Signup({ navigation }) {
     const [isPasswordShow, setIsPasswordShow] = useState(true)
+
+    const [username, setUsernaem] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    const [errorMessage, setErrorMessage] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
+
+    const [isUsernameExist, setIsUsernameexist] = useState('')
+    const [isEmailExist, setIsEmailExist] = useState('')
+
+    const [usernameState, setUsernameState] = useState('default')
+    const [emailState, setEmailState] = useState('default')
+
+
+    // register form subbmition
+    const register = async () => {
+        const user = {
+            username, email, password
+        }
+
+        console.log(user)
+
+        setIsLoading(true)
+        AuthService.registerUser(user)
+            .then((response)=> {
+                setIsLoading(false)
+                console.log(response)
+                if(!response?.status){
+                    setErrorMessage(response?.message)
+                }
+            })
+
+        // navigation.navigate('ResisterPhone')
+    }
+
+    const checkUserExist = async (type, value) => {
+        if(value?.length > 0){
+            AuthService.checkUserExist(type, value)
+                .then((response)=> {
+                    if(response?.status){
+                        type === 'email' && isEmailExist ? setIsEmailExist('') : null
+                        type === 'username' && isUsernameExist ? setIsUsernameexist('') : null
+
+                        type === 'email' ? setEmailState('valid') : null
+                        type === 'username' ? setUsernameState('valid') : null
+                    }else {
+                        type === 'email' ? setIsEmailExist(response?.message) : null
+                        type === 'username' ? setIsUsernameexist(response?.message) : null
+
+                        type === 'email' ? setEmailState('invalid') : null
+                        type === 'username' ? setUsernameState('invalid') : null
+                    }
+                })
+        }
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             {/* Top section start */}
@@ -76,15 +202,7 @@ export default function Signup({ navigation }) {
             >Enter your email, chose a username and password</Text>
 
             {/* Input section start */}
-            <View style={{
-                backgroundColor: Colors.LIGHT_GREY,
-                marginHorizontal: 20,
-                paddingHorizontal: 10,
-                borderRadius: 8,
-                borderWidth: .8,
-                borderColor: Colors.LIGHT_GREY2,
-                justifyContent: 'center',
-            }}>
+            <View style={inputStyle(usernameState)}>{/* username input container */}
                 <View style={{
                     flexDirection: 'row',
                     alignItems: 'center',
@@ -95,10 +213,16 @@ export default function Signup({ navigation }) {
                         color={Colors.DEFAULT_GREY} 
                         style={{marginRight: 10}} 
                     />
-                    <TextInput 
+                    <TextInput // username
                         placeholder='Username' 
                         placeholderTextColor={Colors.DEFAULT_GREY}
                         selectionColor={Colors.DEFAULT_GREY}
+                        onChangeText={(text)=> setUsernaem(text)}
+                        onEndEditing={
+                            ({nativeEvent: {text}}) => {
+                                checkUserExist('username', text)
+                            }
+                        }
                         style={{
                             fontSize: 18,
                             textAlignVertical: 'center',
@@ -108,20 +232,25 @@ export default function Signup({ navigation }) {
                             flex: 1,
                         }}
                     />
+                    
+                    {showMarker(usernameState)}
                 </View>
             </View>
 
+            { // message (username is exist)
+                isUsernameExist && <Text style={{
+                    fontSize: 10,
+                    lineHeight: 10 * 1.4,
+                    color: Colors.DEFAULT_RED,
+                    fontFamily: Fonts.UBUNTU_MEDIUM,
+                    marginHorizontal: 20,
+                    marginTop: 5,
+                }}>{isUsernameExist}</Text>
+            }
+
             <Separator height={16} />
 
-            <View style={{
-                backgroundColor: Colors.LIGHT_GREY,
-                marginHorizontal: 20,
-                paddingHorizontal: 10,
-                borderRadius: 8,
-                borderWidth: .8,
-                borderColor: Colors.LIGHT_GREY2,
-                justifyContent: 'center',
-            }}>
+            <View style={inputStyle(emailState)}>{/* email input container */}
                 <View style={{
                     flexDirection: 'row',
                     alignItems: 'center',
@@ -132,10 +261,16 @@ export default function Signup({ navigation }) {
                         color={Colors.DEFAULT_GREY} 
                         style={{marginRight: 10}} 
                     />
-                    <TextInput 
+                    <TextInput // Email
                         placeholder='Email' 
                         placeholderTextColor={Colors.DEFAULT_GREY}
                         selectionColor={Colors.DEFAULT_GREY}
+                        onChangeText={(text)=> setEmail(text)}
+                        onEndEditing={
+                            ({nativeEvent: {text}}) => {
+                                checkUserExist('email', text)
+                            }
+                        }
                         style={{
                             fontSize: 18,
                             textAlignVertical: 'center',
@@ -145,8 +280,21 @@ export default function Signup({ navigation }) {
                             flex: 1,
                         }}
                     />
+
+                    {showMarker(emailState)}
                 </View>
             </View>
+
+            { // message (email is exist)
+                isEmailExist && <Text style={{
+                    fontSize: 10,
+                    lineHeight: 10 * 1.4,
+                    color: Colors.DEFAULT_RED,
+                    fontFamily: Fonts.UBUNTU_MEDIUM,
+                    marginHorizontal: 20,
+                    marginTop: 5,
+                }}>{isEmailExist}</Text>
+            }
 
             <Separator height={16} />
 
@@ -168,11 +316,12 @@ export default function Signup({ navigation }) {
                         size={22} 
                         color={Colors.DEFAULT_GREY} style={{marginRight: 10}} 
                     />
-                    <TextInput
+                    <TextInput // password 
                         secureTextEntry={isPasswordShow}
                         placeholder='Password' 
                         placeholderTextColor={Colors.DEFAULT_GREY}
                         selectionColor={Colors.DEFAULT_GREY}
+                        onChangeText={(text)=> setPassword(text)}
                         style={{
                             fontSize: 18,
                             textAlignVertical: 'center',
@@ -193,7 +342,18 @@ export default function Signup({ navigation }) {
             </View>
             {/* Input section end */}
 
-            <TouchableOpacity activeOpacity={0.8} style={{
+            { // error message
+                errorMessage && <Text style={{
+                    fontSize: 10,
+                    lineHeight: 10 * 1.4,
+                    color: Colors.DEFAULT_RED,
+                    fontFamily: Fonts.UBUNTU_MEDIUM,
+                    marginHorizontal: 20,
+                    marginTop: 5,
+                }}>{errorMessage}</Text>
+            }
+
+            <TouchableOpacity activeOpacity={0.8} style={{ // register button
                 backgroundColor: Colors.DEFAULT_GREEN,
                 marginHorizontal: 20,
                 borderRadius: 8,
@@ -202,14 +362,23 @@ export default function Signup({ navigation }) {
                 alignItems: 'center',
                 marginTop: 20,
             }}
-            onPress={() => navigation.navigate('ResisterPhone')}
+            onPress={() => register()}
             >
-                <Text style={{
-                    fontSize: 18,
-                    fontFamily: Fonts.UBUNTU_MEDIUM,
-                    color: Colors.DEFAULT_WHITE,
-                    lineHeight: 18 * 1.4,
-                }}>Sign Up</Text>
+                {
+                    isLoading ? (
+                        <Lottie
+                            source={Images.LOADING}
+                            autoPlay
+                        />
+                    ): (
+                        <Text style={{
+                            fontSize: 18,
+                            fontFamily: Fonts.UBUNTU_MEDIUM,
+                            color: Colors.DEFAULT_WHITE,
+                            lineHeight: 18 * 1.4,
+                        }}>Sign Up</Text>
+                    )
+                }
             </TouchableOpacity>
 
             <Text style={{
@@ -221,7 +390,7 @@ export default function Signup({ navigation }) {
                 marginTop: 20,
             }}>OR</Text>
 
-            <TouchableOpacity activeOpacity={0.8} style={{
+            <TouchableOpacity activeOpacity={0.8} style={{ // facebook button
                 backgroundColor: Colors.FABEBOOK_BLUE,
                 paddingVertical: 15,
                 marginHorizontal: 20,
@@ -258,7 +427,7 @@ export default function Signup({ navigation }) {
                 </View>
             </TouchableOpacity>
             
-            <TouchableOpacity activeOpacity={0.8} style={{
+            <TouchableOpacity activeOpacity={0.8} style={{ // Google button
                 backgroundColor: Colors.GOOGLE_BLUE,
                 paddingVertical: 15,
                 marginHorizontal: 20,

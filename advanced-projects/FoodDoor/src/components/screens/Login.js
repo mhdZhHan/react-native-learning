@@ -7,6 +7,9 @@ import React, { useState } from 'react'
 import Ionic from 'react-native-vector-icons/Ionicons'
 import Feather from 'react-native-vector-icons/Feather'
 
+// Lottie 
+import Lottie from 'lottie-react-native'
+
 // constants
 import { Colors, Fonts, Images } from '../../contants'
 
@@ -16,9 +19,38 @@ import { Separator, ToggleButton } from '../includes'
 // utils
 import { Display } from '../../utils'
 
+// services
+import { AuthService } from '../../services'
+
 
 export default function Login({ navigation }) {
     const [isPasswordShow, setIsPasswordShow] = useState(true)
+
+    const [username, setUsernaem] = useState('')
+    const [password, setPassword] = useState('')
+
+    const [isLoading, setIsLoading] = useState(false)
+    const [errorMessage, setErrorMessage] = useState('')
+
+
+    // login form subbmition
+    const login = async () => {
+        const user = {
+            username, password
+        }
+
+        setIsLoading(true)
+        AuthService.loginUser(user)
+            .then(
+                (response)=> {
+                    setIsLoading(false)
+                    console.log(response)
+                    if(!response?.status){
+                        setErrorMessage(response?.message)
+                    }
+                }
+            )
+    }
 
     return (
         <View style={styles.container}>
@@ -96,6 +128,7 @@ export default function Login({ navigation }) {
                             color: Colors.DEFAULT_BLACK,
                             flex: 1,
                         }}
+                        onChangeText={(text) => setUsernaem(text)}
                      />
                 </View>
             </View>{/* input username */}
@@ -129,6 +162,7 @@ export default function Login({ navigation }) {
                             color: Colors.DEFAULT_BLACK,
                             flex: 1,
                         }}
+                        onChangeText={(text) => setPassword(text)}
                      />
                     <Feather 
                         name={!isPasswordShow ? 'eye' : 'eye-off'}
@@ -141,7 +175,18 @@ export default function Login({ navigation }) {
             </View>
             {/* Input section end */}
 
-            <Text></Text>
+            { // error message
+                errorMessage && <Text style={{
+                    fontSize: 10,
+                    lineHeight: 10 * 1.4,
+                    color: Colors.DEFAULT_RED,
+                    fontFamily: Fonts.UBUNTU_MEDIUM,
+                    marginHorizontal: 20,
+                    marginTop: 3,
+                    marginBottom: 10,
+                }}>{errorMessage}</Text>
+            }
+
             <View style={{
                 marginHorizontal: 20,
                 flexDirection: 'row',
@@ -172,21 +217,34 @@ export default function Login({ navigation }) {
                 >Forgot password</Text>
             </View>
 
-            <TouchableOpacity activeOpacity={0.8} style={{
-                backgroundColor: Colors.DEFAULT_GREEN,
-                marginHorizontal: 20,
-                borderRadius: 8,
-                height: Display.setHeight(6),
-                justifyContent: 'center',
-                alignItems: 'center',
-                marginTop: 20,
-            }}>
-                <Text style={{
-                    fontSize: 18,
-                    fontFamily: Fonts.UBUNTU_MEDIUM,
-                    color: Colors.DEFAULT_WHITE,
-                    lineHeight: 18 * 1.4,
-                }}>Sign In</Text>
+            {/* sigin button */}
+            <TouchableOpacity activeOpacity={0.8} 
+                style={{
+                    backgroundColor: Colors.DEFAULT_GREEN,
+                    marginHorizontal: 20,
+                    borderRadius: 8,
+                    height: Display.setHeight(6),
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginTop: 20,
+                }}
+                onPress={login}
+            >
+                {
+                    isLoading ? (
+                        <Lottie
+                            source={Images.LOADING}
+                            autoPlay
+                        />
+                    ): (
+                        <Text style={{
+                            fontSize: 18,
+                            fontFamily: Fonts.UBUNTU_MEDIUM,
+                            color: Colors.DEFAULT_WHITE,
+                            lineHeight: 18 * 1.4,
+                        }}>Sign In</Text>
+                    )
+                }
             </TouchableOpacity>
 
             <View style={{
